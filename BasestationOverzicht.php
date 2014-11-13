@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require_once __DIR__. './Database/DatabaseFunctions/BaseStation.php';
+require_once __DIR__. '/Database/DatabaseFunctions/BaseStation.php';
 
 
 
