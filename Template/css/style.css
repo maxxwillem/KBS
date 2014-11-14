@@ -1,0 +1,15 @@
+body {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 13px;
+}
+.footer{
+    font-size: 9px;
+}
+
+/* Zorgt ervoor dat menu een leeg vlak heeft onder uitloggen. Wanneer het scherm kleiner is dan 992px, gaat de website over in mobile design*/
+@media (min-width: 992px) {
+    .empty{
+        padding-bottom: 100%;
+        margin-bottom: -100%;
+    }
+}
