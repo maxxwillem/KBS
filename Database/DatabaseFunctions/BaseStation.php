@@ -36,16 +36,22 @@ class BaseStation {
     }
     
     public function getBasestationListMysqli() {
+        //TODO edit sql query
         global $mysqli;
         $sql = "SELECT * FROM basestation_overzicht";
         $this->stmt = $mysqli->prepare($sql);
         if ($this->stmt !== FALSE) {
             $this->stmt->execute();
             $this->stmt->bind_result($id, $snaam, $datum, $engineer, $type);
+            while ($this->stmt->fetch()) {
+                print($id . $snaam . $datum . $engineer . $type);
+            }
+            $this->stmt->close();
         }
     }
     
     public function updateBasestation($nodeNummer, $siteNaam, $typeBasestation) {
+        //TODO edit sql query
         global $mysqli;
         $sql = "INSERT INTO basestation (node_nummer, site_naam, type_basestation)"
                 . "VALUES (?, ?, ?)"
@@ -58,6 +64,7 @@ class BaseStation {
     }
     
     public function deleteBasestation($id) {
+        //TODO edit sql query
         if (!is_int($id)) {
             trigger_error("deleteBasestation expects parameter to be an Integer");
         } else {
