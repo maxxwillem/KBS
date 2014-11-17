@@ -17,10 +17,8 @@ require_once __DIR__. '/Database/DatabaseFunctions/BaseStation.php';
 
 function getList() {
     $t = new BaseStation();
-    
     print("<table><tr><th>ID</th><th>Site naam</th><th>Datum</th>"
             . "<th>Engineer</th><th>Type onderhoud</th>");
-    
     foreach ($t->getBasestationList() as $mArray) {
         print("<tr>");
         foreach ($mArray as $value) {

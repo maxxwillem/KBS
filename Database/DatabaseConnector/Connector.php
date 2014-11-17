@@ -13,6 +13,10 @@
 class Connector {
 
     private static $INSTANCE;
+    /**
+     *
+     * @var PDO
+     */
     private $db;
 
     /**
