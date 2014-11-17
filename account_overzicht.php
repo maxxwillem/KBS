@@ -28,6 +28,23 @@
         <script src="Footable/js/footable.filter.js" type="text/javascript"></script>
     </head>
     <body>
+        <?php
+        //php database gedeelte
+        require_once './Database/mysql_connect.php';
+
+        function LaatZien($mysqli)
+        {
+            $stmt = $mysqli->prepare("SELECT * FROM accounts");
+            $stmt->execute();
+            $stmt->bind_result($voornaam, $achternaam, $functie, $gebruikersnaam);
+            while ($stmt->fetch())
+            {
+                print("<tr><td>$voornaam</td><td>$achternaam</td><td>$functie</td></tr>");
+            }
+            $stmt->free_result();
+            $stmt->close();
+        }
+        ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -35,7 +52,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="page-header">
-                        <h1>Account Beheer</h1>
+                        <h1>Account beheer</h1>
                     </div>
                 </div>
             </div>
@@ -59,7 +76,7 @@
                                             $('.footable').footable();
                                         });
                             </script>
-                            <p> 
+                            <p>
                                 <!--                                Filteren van tabelresultaten-->
                                 Zoek: <input id="filter" type="text" size="30px"/>
                                 Functie: <select class="filter-functie">
@@ -83,16 +100,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>A Bunch</td>
-                                        <td>Of some</td>
-                                        <td>Technicus</td>
-                                    </tr>
-                                    <tr>
-                                        <td>A Bit</td>
-                                        <td>More </td>
-                                        <td>Senior</td>
-                                    </tr>
+                                    <?php LaatZien($mysqli); ?>
                                 </tbody>
                             </table>
                         </div>

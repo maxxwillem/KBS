@@ -5,10 +5,12 @@
 $host = 'localhost';
 $user = 'root';
 $pass = 'usbw';
-$name = 'databasenaam';
+$name = 'testtable';
+$port = '3307'
 $mysqli = new mysqli($host, $user, $pass, $name);
 
-if ($mysqli->connect_error) {
+if ($mysqli->connect_error)
+{
     die("Database connection failed");
 }
 ?>
