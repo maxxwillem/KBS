@@ -1,4 +1,5 @@
 <?php
+
 //altijd session starten eerst, ookal is die al bezig
 session_start();
 
@@ -9,6 +10,5 @@ session_unset();
 session_destroy();
 
 //als je uitlogd ga je weer naar LoginForm.php
-header("location: LoginForm.php");
-
+header("location: index.php");
 ?>
