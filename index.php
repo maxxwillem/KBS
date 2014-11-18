@@ -54,7 +54,7 @@
                                         </td></tr>
 
                                     <tr><td colspan="2">
-                                            <input type="submit" class='btn btn-success btn-xs' name="login" value="Login">
+                                            <input type="submit" class='btn btn-primary btn-xs' name="login" value="Login">
                                         </td></tr>
                                 </table>
                             </form>
