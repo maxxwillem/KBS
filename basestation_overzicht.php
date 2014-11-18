@@ -1,8 +1,6 @@
 <?php
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @author: Robin Koning
  */
 
 require_once __DIR__ . '/Database/DatabaseFunctions/BaseStation.php';
@@ -12,13 +10,24 @@ require_once __DIR__ . '/Database/DatabaseFunctions/BaseStation.php';
  */
 function getList() {
     $t = new BaseStation();
-    foreach ($t->getBasestationList() as $mArray) {
+    foreach ($t->getBasestationListMysqli() as $mArray) {
         print("<tr>");
         foreach ($mArray as $value) {
             print("<td>" . $value . "</td>");
         }
-        print("<td>" . "<a href=\"\" class=\"wis-zoekactie\" title=\"\">[wijzig]</a>"
-                . "<a href=\"\" class=\"wis-zoekactie\" title=\"\">[delete]</a>" . "</td>");
+        print("<td>" . "<a href=\"\" class=\"wis-zoekactie\" title=\"\">[wijzig]</a>" . "</td>");
+        print("</tr>");
+    }
+}
+
+function getListMySQLi() {
+    $t = new BaseStation();
+    foreach ($t->getBasestationListMysqli() as $mArray) {
+        print("<tr>");
+        foreach ($mArray as $value) {
+            print("<td>" . $value . "</td>");
+        }
+        print("<td>" . "<a href=\"\" class=\"wis-zoekactie\" title=\"\">[wijzig]</a>" . "</td>");
         print("</tr>");
     }
 }
@@ -88,17 +97,16 @@ function getList() {
                             <table data-filter="#filter" class="footable table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Node nummer</th>
+                                        <th>Regio</th>
                                         <th>Site naam</th>
-                                        <th>Datum</th>
-                                        <th>Engineer</th>
-                                        <th>Type onderhoud</th>
+                                        <th>Type</th>
                                         <th>Overig</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    getList();
+                                    getListMySQLi();
                                     ?>
                                 </tbody>
                             </table>

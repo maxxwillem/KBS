@@ -8,7 +8,7 @@
  * To use this class for mysql statements: <br />
  * $exampleVariable->getConnection()->prepare(SQL query here);
  * 
- * @author Robin
+ * @author Robin Koning
  */
 class Connector {
 

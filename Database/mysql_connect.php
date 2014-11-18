@@ -5,7 +5,7 @@
 $host = 'localhost';
 $user = 'root';
 $pass = 'usbw';
-$name = 'testtable';
+$name = 'rmd';
 $port = '3307';
 $mysqli = new mysqli($host, $user, $pass, $name, $port);
 
