@@ -76,7 +76,7 @@
                             <script type="text/javascript"> //aanroepen van footable
                                 $(
                                         function () {
-                                            $('.footable').footable({addRowToggle: false});
+                                            $('.footable').footable();
                                         });
                             </script>
 
