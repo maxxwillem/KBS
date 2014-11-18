@@ -27,7 +27,8 @@ function getListMySQLi() {
         foreach ($mArray as $value) {
             print("<td>" . $value . "</td>");
         }
-        print("<td>" . "<a href=\"\" class=\"wis-zoekactie\" title=\"\">[wijzig]</a>" . "</td>");
+        print("<td>" . "<button type='submit' class='btn btn-success btn-xs' name='edit' value='$mArray[0]'>Bewerken</button>" . "</td>");
+        
         print("</tr>");
     }
 }
@@ -80,7 +81,7 @@ function getListMySQLi() {
                         <a href="account_overzicht.php" class="list-group-item">Account beheer</a>
                         <a href="#" class="list-group-item active">Basestation overzicht</a>
                         <a href="#" class="list-group-item">Wachtwoord wijzigen</a>
-                        <a href="#" class="list-group-item">Uitloggen</a>
+                        <a href="Logout.php" class="list-group-item">Uitloggen</a>
                         <div class="list-group-item empty"></div>
                     </div>
                 </div>
@@ -98,10 +99,10 @@ function getListMySQLi() {
                                 <thead>
                                     <tr>
                                         <th>Node nummer</th>
-                                        <th>Regio</th>
-                                        <th>Site naam</th>
-                                        <th>Type</th>
-                                        <th>Overig</th>
+                                        <th data-hide="phone">Regio</th>
+                                        <th data-hide="phone">Site naam</th>
+                                        <th data-hide="phone">Type</th>
+                                        <th data-hide="phone">Overig</th>
                                     </tr>
                                 </thead>
                                 <tbody>
