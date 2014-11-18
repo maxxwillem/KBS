@@ -39,7 +39,10 @@
             $stmt->bind_result($voornaam, $achternaam, $functie, $gebruikersnaam);
             while ($stmt->fetch())
             {
-                print("<tr><td>$voornaam</td><td>$achternaam</td><td>$functie</td></tr>");
+                print("<tr><td>$gebruikersnaam</td><td>$voornaam</td><td>$achternaam</td><td>$functie</td><td>"
+                        . "<div class='button'>"
+                        . "    <button type='submit' class='btn btn-success btn-xs' name='edit' value='$gebruikersnaam'>Bewerken</button>"
+                        . "</div></td></tr>");
             }
             $stmt->free_result();
             $stmt->close();
@@ -61,7 +64,7 @@
                     <div class="list-group">
                         <a href="#" class="list-group-item">Basestation onderhoud</a>
                         <a href="account_overzicht.php" class="list-group-item active">Account beheer</a>
-                        <a href="#" class="list-group-item">Basestation beheer</a>
+                        <a href="BasestationOverzicht.php" class="list-group-item">Basestation Overzicht</a>
                         <a href="#" class="list-group-item">Wachtwoord wijzigen</a>
                         <a href="#" class="list-group-item">Uitloggen</a>
                         <div class="list-group-item empty"></div>
@@ -73,9 +76,10 @@
                             <script type="text/javascript"> //aanroepen van footable
                                 $(
                                         function () {
-                                            $('.footable').footable();
+                                            $('.footable').footable({addRowToggle: false});
                                         });
                             </script>
+
                             <p>
                                 <!--                                Filteren van tabelresultaten-->
                                 Zoek: <input id="filter" type="text" size="30px"/>
@@ -89,20 +93,27 @@
                                 <a href="#clear" class="wis-zoekactie" title="clear filter">[Wis zoekactie]</a>
                             </p>
                             <br>
-                            <a href="account_toevoegen.php">Voeg een account toe!</a>
-                            <table data-filter="#filter" class="footable table">
-                                <!--                                Footable Tabel, komt nog een database bij :P-->
-                                <thead>
-                                    <tr>
-                                        <th>Voornaam</th>
-                                        <th>Achternaam</th>
-                                        <th data-hide="phone">Functie</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php LaatZien($mysqli); ?>
-                                </tbody>
-                            </table>
+
+                            <a href="account_toevoegen.php">Nieuw account toevoegen</a>
+
+                            <form method="post" action="account_bewerken.php">
+                                <table data-filter="#filter" class="footable table">
+                                    <!--                                Footable Tabel, komt nog een database bij :P-->
+                                    <thead>
+                                        <tr>
+                                            <th>Gebruikersnaam</th>
+                                            <th data-hide="phone">Voornaam</th>
+                                            <th data-hide="phone">Achternaam</th>
+                                            <th data-ignore="true" data-hide="all">Functie</th>
+                                            <th data-hide="phone" data-sort-ignore="true">Bewerken</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php LaatZien($mysqli); ?>
+                                    </tbody>
+                                </table>
+                            </form>
+
                         </div>
                     </div>
                 </div>
