@@ -88,7 +88,7 @@
                                 <div class="form-group">
                                     <label for="Functie" class="col-sm-2 control-label">Functie:</label>
                                     <div class="col-sm-3">
-                                        <select id="Functie" class="form-control">
+                                        <select name="Functie" id="Functie" class="form-control">
                                             <option value="leeg">--------</option>
                                             <option value="Beheerder">Beheerder</option>
                                             <option value="Senior">Senior</option>
