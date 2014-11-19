@@ -41,25 +41,33 @@
                 <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form method="POST" action=login.php>
-                                <table>
-                                    <tr><td>
-                                            <b>Gebruikersnaam:</b></td>
-                                        <td><input type="text" name="gebruiker" required="required">
-                                        </td></tr>
+                            <form class="form-horizontal" role="form" method="POST" action="login.php">
 
-                                    <tr><td>
-                                            <b>Password:</b></td>
-                                        <td><input type="password" name="pass" required="required">
-                                        </td></tr>
+                                <div class="form-group">
 
-                                    <tr><td colspan="2">
-                                            <input type="submit" class='btn btn-primary btn-xs' name="login" value="Login">
-                                        </td></tr>
-                                </table>
+                                    <label class="col-sm-3 control-label">Gebruikersnaam:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="gebruiker" required="required">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-3 control-label">Wachtwoord:</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="password" name="pass" required="required">
+
+                                    </div></div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4">
+
+                                        <input type="submit" class='btn btn-primary btn-group-lg' name="login" value="Login">
+                                    </div></div>
+
                             </form>
                             <br>
-                            
+
                         </div>
                     </div>
                 </div>
