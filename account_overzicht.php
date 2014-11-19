@@ -102,7 +102,7 @@
 
                             <a href="AccountToevoegenFormulier.php">Nieuw account toevoegen</a>
 
-                            <form method="post" action="account_bewerken.php">
+                            <form method="post" action="AccountWijzigen.php">
                                 <table data-filter="#filter" class="footable table">
                                     <!--                                Footable Tabel, komt nog een database bij :P-->
                                     <thead>
