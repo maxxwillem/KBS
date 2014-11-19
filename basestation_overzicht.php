@@ -106,7 +106,8 @@ function getListMySQLi() {
                                         <th data-hide="phone">Regio</th>
                                         <th data-hide="phone">Site naam</th>
                                         <th data-hide="phone">Type</th>
-                                        <th data-hide="phone">Overig</th>
+                                        <th data-hide="phone" class="hide"></th>
+                                        <th data-hide="phone">Bewerken</th>
                                     </tr>
                                 </thead>
                                 <tbody>
