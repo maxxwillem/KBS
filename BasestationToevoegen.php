@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php
+    if (isset($_POST["toevoegen"])) {
+        header('location: BasestationOverzicht.php');
+    }
+    ?>
     <head>
         <meta charset="utf-8">
         <title>Basestation toevoegen</title>
@@ -55,80 +60,96 @@
                         <div class="panel-body">
                             <!-- Content -->
 
-                            <div class="basestationToevoegenContent">
-                                <!-- Standaard formulier met data -->
-                                <form  method="GET"> <br>
-                                    Node nummer: <input type="text" name="nodenummer"><br><br>
-                                    Regionummer: <input type="text" name="regio"><br><br>
-                                    Sitenaam: <input type="text" name="sitenaam"><br><br>
-                                    Type basestation: <select name="typeBasestation">
-                                        <option value="leeg">[Kies type]</option>
-                                        <option value="BRS2">BRS2</option>
-                                        <option value="BRU3">BRU3</option>
-                                    </select> <br><br>
-                                    Aandachtspunten: <textarea rows="6" cols="60"></textarea> <br><br>
-                                    </div>
+                            <form method="POST"> <br>
+                                <div class="basestationToevoegenContent">
+                                    <!-- Standaard formulier met data -->
 
-                                    <div class="button">
-                                        <input type="button" name="annuleren" value="Annuleren">
-                                        <input type="submit" name="toevoegen" value="Toevoegen">
-                                        </form>
-                                    </div>
+                                    <table class="basestationToevoegTable">
+                                        <tr><td>Node nummer:</td><td> <input type="text" name="nodenummer" required><br><br></td></tr>
+                                        <tr><td>Regionummer:</td><td> <input type="text" name="regio" required><br><br></td></tr>
+                                        <tr><td>Sitenaam:</td><td> <input type="text" name="sitenaam" required><br><br></td></tr>
+                                        <tr><td>Type basestation:</td><td> <select name="typeBasestation" required>
+                                                    <option value="leeg">[Kies type]</option>
+                                                    <option value="BRS2">BRS2</option>
+                                                    <option value="BRU3">BRU3</option>
+                                                </select> <br><br></td></tr>
+                                        <tr><td>Aandachtspunten:</td><td><textarea rows="6" cols="60"></textarea> <br><br></td></tr>
+                                    </table>
+                                </div>
 
-                                    <?php
-                                    $link = mysqli_connect("localhost", "root", "usbw", "testtable", 3307);
-                                    /* Check of de verbinding het doet
-                                      if ($link) {
-                                      print("Verbinding is gemaakt" . "<br>" . "<br>");
-                                      } else {
-                                      print("Kan helaas geen verbinding maken" . "<br>" . "<br>");
-                                      print(mysqli_connect_error());
-                                      } */
+                                <div class="button">
+                                    <input type="button" name="annuleren" value="Annuleren">
+                                    <input type="submit" name="toevoegen" value="Toevoegen">
 
-                                    // Als alle velden ingevuld zijn dan ...
-                                    if (isset($_GET["nodenummer"]) && isset($_GET["regio"]) && isset($_GET["sitenaam"]) && isset($_GET["typeBasestation"]) && isset($_GET["toevoegen"])) {
-                                        $nodenummer = $_GET["nodenummer"];
-                                        $regio = $_GET["regio"];
-                                        $sitenaam = $_GET["sitenaam"];
-                                        $type = $_GET["typeBasestation"];
+                                </div>
+                            </form>
 
-                                        $stmt2 = mysqli_prepare($link, "INSERT INTO basestations VALUES (?,?,?,?)");
-                                        mysqli_stmt_bind_param($stmt2, 'ssss', $nodenummer, $regio, $sitenaam, $type);
-                                        mysqli_stmt_execute($stmt2);
-                                    }
-
-
-                                    //Weergeven van database (Als test)
-                                    $stmt = mysqli_prepare($link, "SELECT * FROM basestations");
-                                    mysqli_execute($stmt);
-                                    mysqli_stmt_bind_result($stmt, $nodenummer, $regio, $sitenaam, $type);
-
-                                    print('<table><tr><th>Nodenummer</th><th>Regio</th><th>Sitenaam</th><th>Type</th>');
-
-                                    while ($row = mysqli_stmt_fetch($stmt)) {
-                                        print('<tr><td>' . $nodenummer . '</td><td>' . $regio . '</td><td>' . $sitenaam . '</td><td>' . $type . '</td><td>');
-                                    }
-
-                                    print('</table>');
+                            <?php
+                            $link = mysqli_connect("localhost", "root", "usbw", "rmd", 3307);
+                            /* Check of de verbinding het doet
+                              if ($link) {
+                              print("Verbinding is gemaakt" . "<br>" . "<br>");
+                              } else {
+                              print("Kan helaas geen verbinding maken" . "<br>" . "<br>");
+                              print(mysqli_connect_error());
+                              } */
 
 
 
-                                    mysqli_stmt_free_result($stmt);
-                                    mysqli_stmt_close($stmt);
-                                    mysqli_close($link);
-                                    ?>
+                            //Mogelijkheid tot verwijderen Voor testen
 
-                            </div>
+                            if (isset($_POST["verwijderen"])) {
+                                $verwijderen = $_POST["verwijderen"];
+                                $delete = mysqli_prepare($link, "DELETE FROM basestation_overzicht WHERE node = ?");
+                                mysqli_stmt_bind_param($delete, 's', $verwijderen);
+                                mysqli_stmt_execute($delete);
+                            }
+
+                            // Als alle velden ingevuld zijn dan ...
+                            if (isset($_POST["nodenummer"]) && isset($_POST["regio"]) && isset($_POST["sitenaam"]) && isset($_POST["typeBasestation"]) && isset($_POST["toevoegen"]) && ($_POST["typeBasestation"] != "leeg")) {
+                                $nodenummer = $_POST["nodenummer"];
+                                $regio = $_POST["regio"];
+                                $sitenaam = $_POST["sitenaam"];
+                                $type = $_POST["typeBasestation"];
+
+                                $stmt2 = mysqli_prepare($link, "INSERT INTO basestation_overzicht VALUES (?,?,?,?)");
+                                mysqli_stmt_bind_param($stmt2, 'ssss', $nodenummer, $regio, $sitenaam, $type);
+                                mysqli_stmt_execute($stmt2);
+                            }
+
+
+                            /*
+                              //Weergeven van database (Als test)
+                              $stmt = mysqli_prepare($link, "SELECT * FROM basestation_overzicht");
+                              mysqli_execute($stmt);
+                              mysqli_stmt_bind_result($stmt, $nodenummer, $regio, $sitenaam, $type);
+
+                              print('<table><tr><th>Nodenummer</th><th>Regio</th><th>Sitenaam</th><th>Type</th>');
+
+                              while ($row = mysqli_stmt_fetch($stmt)) {
+                              print('<tr><td>' . $nodenummer . '</td><td>' . $regio . '</td><td>' . $sitenaam . '</td><td>' . $type . '</td><td>' . '<a href="BasestationToevoegen.php?verwijderen=' . $nodenummer . '">Verwijderen</a></td></tr>');
+                              }
+
+                              print('</table>');
+
+
+
+                              mysqli_stmt_free_result($stmt);
+                              mysqli_stmt_close($stmt); */
+                            mysqli_close($link);
+                            ?>
+
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="text-center footer">
-                            Dit is de footer
-                        </p>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center footer">
+                        Dit is de footer
+                    </p>
                 </div>
             </div>
+        </div>
     </body>
 </html>

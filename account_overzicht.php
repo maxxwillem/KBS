@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start(); ?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -34,18 +35,18 @@
 
         function LaatZien($mysqli)
         {
-            $stmt = $mysqli->prepare("SELECT * FROM accounts");
-            $stmt->execute();
-            $stmt->bind_result($voornaam, $achternaam, $functie, $gebruikersnaam);
-            while ($stmt->fetch())
+            $stmt = mysqli_prepare($mysqli, "SELECT * FROM accounts");
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $voornaam, $achternaam, $functie, $gebruikersnaam);
+            while (mysqli_stmt_fetch($stmt))
             {
                 print("<tr><td>$gebruikersnaam</td><td>$voornaam</td><td>$achternaam</td><td>$functie</td><td>"
                         . "<div class='button'>"
                         . "    <button type='submit' class='btn btn-success btn-xs' name='edit' value='$gebruikersnaam'>Bewerken</button>"
                         . "</div></td></tr>");
             }
-            $stmt->free_result();
-            $stmt->close();
+            mysqli_stmt_close($stmt);
+            mysqli_close($mysqli);
         }
         ?>
         <div class="container">
@@ -82,7 +83,7 @@
 
                             <p>
                                 <!--                                Filteren van tabelresultaten-->
-                                Zoek: <input id="filter" type="text" size="30px"/>
+                                Zoek: <input id="filter" type="text" size="30"/>
                                 Functie: <select class="filter-functie">
                                     <option></option>
                                     <option value="Technicus">Technicus</option>
@@ -94,7 +95,7 @@
                             </p>
                             <br>
 
-                            <a href="account_toevoegen.php">Nieuw account toevoegen</a>
+                            <a href="AccountToevoegenFormulier.php">Nieuw account toevoegen</a>
 
                             <form method="post" action="account_bewerken.php">
                                 <table data-filter="#filter" class="footable table">

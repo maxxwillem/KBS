@@ -115,6 +115,39 @@ if ( $password_error_count>0 ) {
 <?php
 
 
+if(isset($_POST['Toevoegen'])){
+    if(!empty($gebruikersnaam) && !empty($naam) && !empty($achternaam) && $functie !="Empty" && !empty($wachtwoord)){
+        
+        //haal password op en maak een "salt" aan<---encrypt het wachtwoord
+        htmlspecialchars($_POST['password'])=$wachtwoord;
+        $salt = [
+            'cost' => 11
+        ];
+        //hash is wachtwoord omgezet in rare keten letters en getallen
+        //wat wil je hashen?-->$wachtwoord
+        //welke encryptie gebruik je?-->PASSWORD_Bcrypt
+        //daar voeg je $salt aan toe.
+        
+        $hash=  password_hash($wachtwoord, PASSWORD_BCRYPT, $salt);
+      
+        $link = mysqli_connect("localhost", "root", "root", "[DB-naam]", 3307);
+        
+        $query = "INSERT INTO [tabelnaa] VALUES(?,?,?,?,?)";
+        $statement = mysqli_prepare($link, $query);
+        
+                //ipv $wachtwoord --> $hash doorsturen
+        //hierin sturen we door,$gebruikersnaam $naam,$achternaam,$functie en wachtwoord($hash). 5x een string!
+
+        mysqli_stmt_bind_param($statement, "sssss", $gebruikersnaam,$naam,$achternaam,$functie,$hash);
+        mysqli_stmt_execute($statement);
+        mysqli_stmt_close($statement);
+             mysqli_close($link);
+        
+   
+    }
+    
+}
+    
 
          
         
