@@ -82,38 +82,43 @@
                             </script>
 
                             <p>
-                                <!--                                Filteren van tabelresultaten-->
-                                Zoek: <input id="filter" type="text" size="30"/>
-                                Functie: <select class="filter-functie">
-                                    <option></option>
-                                    <option value="Technicus">Technicus</option>
-                                    <option value="Senior">Senior</option>
-                                    <option value="Beheerder">Beheerder</option>
-                                </select>
-                                <!--                                wissen van de zoekactie-->
-                                <a href="#clear" class="wis-zoekactie" title="clear filter">[Wis zoekactie]</a>
-                            </p>
-                            <br>
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="filter" class="col-sm-1 control-label">Zoek:</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control input-sm" id="filter" placeholder="Zoek">
+                                    </div>
+                                    <label for="functie" class="col-sm-1 control-label">Functie:</label>
+                                    <div class="col-sm-2">
+                                        <select id="functie" class="form-control input-sm filter-functie">
+                                            <option></option>
+                                            <option value="Technicus">Technicus</option>
+                                            <option value="Senior">Senior</option>
+                                            <option value="Beheerder">Beheerder</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <a href="AccountToevoegenFormulier.php">Nieuw account toevoegen</a>
 
-                            <form method="post" action="account_bewerken.php">
-                                <table data-filter="#filter" class="footable table">
-                                    <!--                                Footable Tabel, komt nog een database bij :P-->
-                                    <thead>
-                                        <tr>
-                                            <th>Gebruikersnaam</th>
-                                            <th data-hide="phone">Voornaam</th>
-                                            <th data-hide="phone">Achternaam</th>
-                                            <th data-ignore="true" data-hide="all">Functie</th>
-                                            <th data-hide="phone" data-sort-ignore="true">Bewerken</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php LaatZien($mysqli); ?>
-                                    </tbody>
-                                </table>
-                            </form>
+                                <a href="AccountToevoegenFormulier.php">Nieuw account toevoegen</a>
+
+                                <form method="post" action="account_bewerken.php">
+                                    <table data-filter="#filter" class="footable table">
+                                        <!--                                Footable Tabel, komt nog een database bij :P-->
+                                        <thead>
+                                            <tr>
+                                                <th>Gebruikersnaam</th>
+                                                <th data-hide="phone">Voornaam</th>
+                                                <th data-hide="phone">Achternaam</th>
+                                                <th data-ignore="true" data-hide="all">Functie</th>
+                                                <th data-hide="phone" data-sort-ignore="true">Bewerken</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php LaatZien($mysqli); ?>
+                                        </tbody>
+                                    </table>
+                                </form>
 
                         </div>
                     </div>
@@ -128,7 +133,7 @@
             </div>
         </div>
         <script type="text/javascript">
-//            script voor het filteren van het keuzemenu
+            //            script voor het filteren van het keuzemenu
             $(function () {
                 $('table').footable().bind('footable_filtering', function (e) {
                     var selected = $('.filter-functie').find(':selected').text();
@@ -138,13 +143,13 @@
                     }
                 });
 
-//            script voor het filteren van het keuzemenu
+                //            script voor het filteren van het keuzemenu
                 $('.filter-functie').change(function (e) {
                     e.preventDefault();
                     $('table').trigger('footable_filter', {filter: $('#filter').val()});
                 });
 
-//script voor het wissen van zoekactie
+                //script voor het wissen van zoekactie
                 $('.wis-zoekactie').click(function (e) {
                     e.preventDefault();
                     $('.filter-functie').val('');
