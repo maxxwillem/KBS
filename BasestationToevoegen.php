@@ -2,7 +2,7 @@
 <html lang="en">
     <?php
     if (isset($_POST["toevoegen"])) {
-        header('location: BasestationOverzicht.php');
+        header('location: basestation_overzicht.php');
     }
     ?>
     <head>
@@ -73,7 +73,7 @@
                                                     <option value="BRS2">BRS2</option>
                                                     <option value="BRU3">BRU3</option>
                                                 </select> <br><br></td></tr>
-                                        <tr><td>Aandachtspunten:</td><td><textarea rows="6" cols="60"></textarea> <br><br></td></tr>
+                                        <tr><td>Opmerkingen:</td><td><textarea rows="6" cols="60" name="opmerking"></textarea> <br><br></td></tr>
                                     </table>
                                 </div>
 
@@ -111,9 +111,11 @@
                                 $regio = $_POST["regio"];
                                 $sitenaam = $_POST["sitenaam"];
                                 $type = $_POST["typeBasestation"];
+                                $opmerking = $_POST["opmerking"];
 
-                                $stmt2 = mysqli_prepare($link, "INSERT INTO basestation_overzicht VALUES (?,?,?,?)");
-                                mysqli_stmt_bind_param($stmt2, 'ssss', $nodenummer, $regio, $sitenaam, $type);
+
+                                $stmt2 = mysqli_prepare($link, "INSERT INTO basestation_overzicht VALUES (?,?,?,?,?)");
+                                mysqli_stmt_bind_param($stmt2, 'iisss', $nodenummer, $regio, $sitenaam, $type, $opmerking);
                                 mysqli_stmt_execute($stmt2);
                             }
 
