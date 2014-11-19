@@ -30,14 +30,14 @@ class BaseStation {
     
     private $returnedArray;
 
-    public function getBasestationList() {
-        $sql = "SELECT * FROM basestation_overzicht";
-        $this->db = Connector::getInstance();
-        $this->sth = $this->db->getConnection()->prepare($sql);
-        $this->sth->execute();
-        $result = $this->sth->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
+//    public function getBasestationList() {
+//        $sql = "SELECT * FROM basestation_overzicht";
+//        $this->db = Connector::getInstance();
+//        $this->sth = $this->db->getConnection()->prepare($sql);
+//        $this->sth->execute();
+//        $result = $this->sth->fetchAll(PDO::FETCH_ASSOC);
+//        return $result;
+//    }
 
     public function getBasestationListMysqli() {
         //TODO edit sql query
