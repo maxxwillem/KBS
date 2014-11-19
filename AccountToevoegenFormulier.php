@@ -48,21 +48,6 @@
                 <div class="col-md-9">
                     <div class="panel panel-default">
                         <div class="panel-body">
-
-
-                            <?php
-                            require Database/mysql_connect.php;
-                            
-                            //sla nieuwe gegevens op
-                            if(isset($_POST)){
-                            $gebruikersnaam = $_POST['Gebruikersnaam'];
-                            $naam = $_POST['Naam'];
-                            $achternaam = $_POST['Achternaam'];
-                            $functie = $_POST['Functie'];
-                            $wachtwoord = $_POST['password'];
-                            $wachtwoord_herhaal = $_POST['passwordcontrole'];
-                            }
-                            ?>
                             <form method="POST" action="AccountToevoegenFormulier.php">
                                 <table>
                                     <tr class="header"><td colspan="2"><h1>Toevoegen Account</h1></td></tr>
@@ -165,10 +150,18 @@
                             </form>  
                             <?php
                             if (isset($_POST['Toevoegen'])) {
+									$gebruikersnaam = $_POST['Gebruikersnaam'];
+									$naam = $_POST['Naam'];
+									$achternaam = $_POST['Achternaam'];
+									$functie = $_POST['Functie'];
+									$wachtwoord = $_POST['password'];
+									$wachtwoord_herhaal = $_POST['passwordcontrole'];
                                 if (!empty($gebruikersnaam) && !empty($naam) && !empty($achternaam) && $functie != "Empty" && !empty($wachtwoord)) {
-
+									
+									require "Database/mysql_connect.php";
+									
                                     //haal password op en maak een "salt" aan<---encrypt het wachtwoord
-                                    htmlspecialchars($_POST['password']) = $wachtwoord;
+                                    $wachtwoord = htmlspecialchars($wachtwoord);
                                     $salt = [
                                         'cost' => 11
                                     ];
