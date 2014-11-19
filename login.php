@@ -6,16 +6,22 @@ session_start();
 $link = mysqli_connect("localhost", "root", "root", "Users", 3307);
 
 //Controleer of er wordt op inloggen wordt gedrukt.
-if (isset($_POST['login']))
-{
+if(isset($_POST['login'])){
+    
+//gebruik real_escape_string voor veiligheid, zet waardes gebruikersnaam en password in juiste variabele    
+$gebruiker_naam = mysqli_real_escape_string($link,$_POST['gebruiker']);
 
-//gebruik real_escape_string voor veiligheid, zet waardes gebruikersnaam en password in juiste variabele
-    $gebruiker_naam = mysqli_real_escape_string($link, $_POST['gebruiker']);
-    $pass = mysqli_real_escape_string($link, $_POST['pass']);
+ //haal password op en maak een "salt" aan<---encrypt het wachtwoord
+        htmlspecialchars($_POST['pass'])=$wachtwoord;
+        $salt = [
+            'cost' => 11
+        ];
+        //hash is wachtwoord omgezet in rare keten letters en getallen
+        $hash=  password_hash($wachtwoord, PASSWORD_BCRYPT, $salt);
 
-
-//zoek query
-    $query = "SELECT * FROM Users WHERE user_name='$gebruiker_naam' AND user_password='$pass'";
+//zoek query [hier nog user_name en user_password veranderen in gegevens van ERD/Database]
+$query = "SELECT * FROM [Users] WHERE [user_name]='$gebruiker_naam' AND [user_password]='$hash'";
+   
 
 
     $user = mysqli_query($link, $query);
@@ -28,7 +34,8 @@ if (isset($_POST['login']))
     {
 
 //sessie wordt aangemaakt met gebruikersnaam, (is uniek voor idere persoon, wordt automatisch nieuwe sessie gestart)
-        $_SESSION['user_name'] = $gebruiker_naam;
+//$_SESSION['user_name']=$gebruiker_naam;
+//$_SESSION['Functie']=$functie;
 
 //hiermee kunnen we gaan aangeven welke beperkingen sommige gebruikers gaan hebben...
 //if($_SESSION['functie']=="Beheerder/technici/senior"){
@@ -45,6 +52,7 @@ if (isset($_POST['login']))
         header('location:index.php');
     }
 }
+
 ?>
 
 
