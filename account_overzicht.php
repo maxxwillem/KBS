@@ -94,7 +94,7 @@
                             </p>
                             <br>
 
-                            <a href="account_toevoegen.php">Nieuw account toevoegen</a>
+                            <a href="AccountToevoegenFormulier.php">Nieuw account toevoegen</a>
 
                             <form method="post" action="account_bewerken.php">
                                 <table data-filter="#filter" class="footable table">
