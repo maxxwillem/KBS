@@ -31,23 +31,7 @@
     <body>
         <?php
         //php database gedeelte
-        require_once './Database/mysql_connect.php';
-
-        function LaatZien($mysqli)
-        {
-            $stmt = mysqli_prepare($mysqli, "SELECT * FROM accounts");
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_bind_result($stmt, $voornaam, $achternaam, $functie, $gebruikersnaam);
-            while (mysqli_stmt_fetch($stmt))
-            {
-                print("<tr><td>$gebruikersnaam</td><td>$voornaam</td><td>$achternaam</td><td>$functie</td><td>"
-                        . "<div class='button'>"
-                        . "    <button type='submit' class='btn btn-success btn-xs' name='edit' value='$gebruikersnaam'>Bewerken</button>"
-                        . "</div></td></tr>");
-            }
-            mysqli_stmt_close($stmt);
-            mysqli_close($mysqli);
-        }
+        require_once './Database/DatabaseFunctions/Account.php';
         ?>
         <div class="container">
             <div class="row">
@@ -115,7 +99,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php LaatZien($mysqli); ?>
+                                        <?php ShowTable(); ?>
                                     </tbody>
                                 </table>
                             </form>
