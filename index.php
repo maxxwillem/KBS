@@ -59,7 +59,7 @@
                                 </table>
                             </form>
                             <br>
-                            <p>Test waardes zijn nu: Gebruikersnaam=MAK, password=TESTEN</p>
+                            
                         </div>
                     </div>
                 </div>
