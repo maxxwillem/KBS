@@ -47,14 +47,31 @@ class BaseStation {
         $this->stmt = $mysqli->prepare($sql);
         if ($this->stmt !== FALSE) {
             $this->stmt->execute();
-            $this->stmt->bind_result($id, $nodenr, $regio, $type);
+            $this->stmt->bind_result($id, $nodenr, $regio, $type, $opmerking);
             while ($this->stmt->fetch()) {
-                array_push($this->returnedArray, array($id, $nodenr, $regio, $type));
+                array_push($this->returnedArray, array($id, $nodenr, $regio, $type, $opmerking));
             }
             $this->stmt->close();
             return $this->returnedArray;
         }
         
+    }
+    
+    public function getBasestationListMysqliT() {
+        global $mysqli;
+        $rArray = array();
+        $sql = "SELECT *"
+                . "FROM basestation_overicht";
+        $stmt = mysqli_prepare($mysqli, $sql);
+        if ($stmt !== FALSE) {
+            $stmt->execute();
+            $stmt->bind_result($id, $nodenr, $regio, $type, $opmerking);
+            while($stmt->fetch())  {
+                array_push($rArray, array($id, $nodenr, $regio, $type, $opmerking));
+            }
+            $stmt->close();
+            return $rArray;
+        }
     }
 
     public function updateBasestation($nodeNummer, $regio, $siteNaam, $type) {
