@@ -26,14 +26,20 @@ function getListMySQLi() {
     foreach ($t->getBasestationListMysqli() as $mArray) {
         print("<form action=\"FormHandler/edit_basestation.php\" method=\"POST\">");
         print("<tr>");
-        foreach ($mArray as $value) {
+        foreach ($mArray as $key => $value) {
+            if ($key !== "opmerking") {
             print("<td>" . $value . "</td>");
+            } else {
+                print("<td class=\"hide\">" . $value . "</td>");
+            }
         }
         print("<td>" . "<button type='submit' class='btn btn-success btn-xs' name='edit' value='$mArray[0]'>Bewerken</button>" . "</td>");
         
         print("</tr>");
         print("</form>");
+        
     }
+    print_r($mArray);
     
 }
 ?>

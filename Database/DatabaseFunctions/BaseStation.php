@@ -49,7 +49,7 @@ class BaseStation {
             $this->stmt->execute();
             $this->stmt->bind_result($id, $nodenr, $regio, $type, $opmerking);
             while ($this->stmt->fetch()) {
-                array_push($this->returnedArray, array($id, $nodenr, $regio, $type, $opmerking));
+                array_push($this->returnedArray, array($id, $nodenr, $regio, $type, "opmerking" => $opmerking));
             }
             $this->stmt->close();
             return $this->returnedArray;
