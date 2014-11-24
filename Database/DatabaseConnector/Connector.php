@@ -32,7 +32,7 @@ class Connector {
 
     /**
      * 
-     * @return the database connection
+     * @return PDO
      */
     public function getConnection() {
         try {

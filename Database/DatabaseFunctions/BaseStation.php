@@ -39,6 +39,11 @@ class BaseStation {
 //        return $result;
 //    }
 
+    /**
+     * 
+     * @global MySQLi $mysqli
+     * @return array
+     */
     public function getBasestationListMysqli() {
         //TODO edit sql query
         global $mysqli;
@@ -57,6 +62,11 @@ class BaseStation {
         
     }
     
+    /**
+     * 
+     * @global MySQLi $mysqli
+     * @return array
+     */
     public function getBasestationListMysqliT() {
         global $mysqli;
         $rArray = array();
