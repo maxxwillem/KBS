@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start(); ?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -26,7 +27,7 @@
         <?php
         // Gebruikersnaam kan niet worden verandert
         $gebruikersnaam = htmlspecialchars($_POST["edit"]);
-        $tablename = "accounts";
+        $tablename = "gebruikers";
         ?>
         <div class="container">
             <div class="row">
@@ -42,10 +43,10 @@
             <div class="row ">
                 <div class="col-md-3">
                     <div class="list-group">
-                        <a href="#" class="list-group-item active">Basestation onderhoud</a>
+                        <a href="formulierovericht.php" class="list-group-item active">Basestation onderhoud</a>
                         <a href="account_overzicht.php" class="list-group-item">Account beheer</a>
                         <a href="BasestationOverzicht.php" class="list-group-item">Basestation beheer</a>
-                        <a href="#" class="list-group-item">Wachtwoord wijzigen</a>
+                        <a href="wijzigen_wachtwoord.php" class="list-group-item">Wachtwoord wijzigen</a>
                         <a href="Logout.php" class="list-group-item">Uitloggen</a>
                         <div class="list-group-item empty"></div>
                     </div>
@@ -100,14 +101,14 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <input type="submit" class="btn btn-danger btn-xs" name="annuleren" value="Annuleren">
-                                        <input type="submit" class="btn btn-primary btn-xs"name="Wijzigen" value="Wijzigen">
+                                        <button type='submit' class='btn btn-primary btn-xs' name='edit' value='$gebruikersnaam'>Bewerken</button>
                                         <input type="submit" class="btn btn-primary btn-xs"name="Verwijderen" value="Verwijderen">
                                     </div>
                                 </div>
                             </form>
                             <?php
                             $link = mysqli_connect("localhost", "root", "usbw", "testtable", 3307);
-                            if (!empty($_POST["Voornaam"]) && isset($_POST["Wijzigen"])) {
+                            if (!empty($_POST["Voornaam"]) && isset($_POST["edit"])) {
                                 $Voornaam = $_POST["Voornaam"];
                                 $stmt = mysqli_prepare($link, "UPDATE $tablename SET Voornaam= ? WHERE gebruikersnaam = '$gebruikersnaam'");
                                 mysqli_stmt_bind_param($stmt, 's', $Voornaam);
@@ -115,7 +116,7 @@
                                 mysqli_stmt_free_result($stmt);
                                 mysqli_stmt_close($stmt);
                             }
-                            if (!empty($_POST["Achternaam"]) && isset($_POST["Wijzigen"])) {
+                            if (!empty($_POST["Achternaam"]) && isset($_POST["edit"])) {
                                 $Achternaamnaam = $_POST["Achternaam"];
                                 $stmt = mysqli_prepare($link, "UPDATE $tablename SET Achternaam=(?)WHERE gebruikersnaam = '$gebruikersnaam'");
                                 mysqli_stmt_bind_param($stmt, 's', $Achternaam);
@@ -123,7 +124,7 @@
                                 mysqli_stmt_free_result($stmt);
                                 mysqli_stmt_close($stmt);
                             }
-                            if (!empty($_POST["Wachtwoord"]) == "" && !empty($_POST["Wachtwoord bevestigen"]) && isset($_POST["Wijzigen"])) {
+                            if (!empty($_POST["Wachtwoord"]) == "" && !empty($_POST["Wachtwoord bevestigen"]) && isset($_POST["edit"])) {
                                 $Wachtwoord = $_POST["Wachtwoord"];
                                 $Wachtwoordbevestiging = $_POST["Wachtwoord bevestigen"];
                                 if (isset($_POST['Toevoegen'])) {
@@ -158,7 +159,7 @@
                                     mysqli_stmt_close($stmt);
                                 }
                             }
-                            if (!empty($_POST["Functie"]) == "" && isset($_POST["Wijzigen"])) {
+                            if (!empty($_POST["Functie"]) == "" && isset($_POST["edit"])) {
                                 $Functie = $_POST["Functie"];
                                 $stmt = mysqli_prepare($link, "UPDATE $tablename SET Functie=(?)WHERE gebruikersnaam = '$gebruikersnaam'");
                                 mysqli_stmt_bind_param($stmt, 's', $Functie);
