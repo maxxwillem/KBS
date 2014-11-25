@@ -11,34 +11,37 @@
  *
  * @author Robin Koning
  */
-class Body {
-    
+class Body
+{
+
     private $first;
     private $second;
     private $navigation;
     private $footer;
     private $footerScript;
-    
+
     /**
      * This is a class for getting the different Body parts
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->first = "";
         $this->second = "";
         $this->navigation = "";
         $this->footer = "";
         $this->footerScript = "";
     }
-    
+
     /**
-     * 
+     *
      * Gets the first part of the HTML body.
-     * 
+     *
      * @param String $header The page header
      * @param String $folders Path to folders
      * @return String The first part of the HTML to output
      */
-    public function getFirstBodyPart($header, $folders) {
+    public function getFirstBodyPart($header, $folders)
+    {
         $this->first .= "<body>"
                 . "<div class=\"container\">"
                 . "<div class=\"row\">"
@@ -56,14 +59,15 @@ class Body {
                 . "</script>";
         return $this->first;
     }
-    
+
     /**
-     * 
+     *
      * Gets the second part of the HTML body.
-     * 
+     *
      * @return String The second part of the HTML to output
      */
-    public function getSecondBodyPart() {
+    public function getSecondBodyPart()
+    {
         $this->second .= ""
                 . "</div></div></div></div>"
                 . $this->getFooter()
@@ -72,23 +76,25 @@ class Body {
                 . "</body>";
         return $this->second;
     }
-    
-    private function getNavigation() {
+
+    private function getNavigation()
+    {
         $this->navigation .= ""
                 . "<div class=\"row \">"
                 . "<div class=\"col-md-3\">"
                 . "<div class=\"list-group\">"
                 . "<a href=\"#\" class=\"list-group-item\">Basestation onderhoud</a>"
-                . "<a href=\"../account_overzicht.php\" class=\"list-group-item\">Account beheer</a>"
-                . "<a href=\"../basestation_overzicht.php\" class=\"list-group-item active\">Basestation overzicht</a>"
-                . "<a href=\"#\" class=\"list-group-item\">Wachtwoord wijzigen</a>"
-                . "<a href=\"Logout.php\" class=\"list-group-item\">Uitloggen</a>"
+                . "<a href=\"./account_overzicht.php\" class=\"list-group-item\">Account beheer</a>"
+                . "<a href=\"./basestation_overzicht.php\" class=\"list-group-item active\">Basestation overzicht</a>"
+                . "<a href=\"./wijzigen_wachtwoord.php\" class=\"list-group-item\">Wachtwoord wijzigen</a>"
+                . "<a href=\"./Logout.php\" class=\"list-group-item\">Uitloggen</a>"
                 . "<div class=\"list-group-item empty\"></div>"
                 . "</div></div>";
         return $this->navigation;
     }
-    
-    private function getFooter() {
+
+    private function getFooter()
+    {
         $this->footer .= ""
                 . "<div class=\"row\">"
                 . "<div class=\"col-md-12\">"
@@ -98,8 +104,9 @@ class Body {
                 . "</div></div>";
         return $this->footer;
     }
-    
-    private function getFooterScript() {
+
+    private function getFooterScript()
+    {
         $this->footerScript .= ""
                 . "<script type=\"text/javascript\">"
                 . " $(function () {"
@@ -118,5 +125,5 @@ class Body {
                 . "</script>";
         return $this->footerScript;
     }
-    
+
 }
