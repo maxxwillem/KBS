@@ -1,6 +1,6 @@
 <?PHP
 
-//Om dit te gebuiken moet je in je bestand "require mysql_connect.php" zonder quotes!
+//Om dit te gebuiken moet je in je bestand: require "mysql_connect.php"
 // Mysqli information
 $host = 'localhost';
 $user = 'root';
