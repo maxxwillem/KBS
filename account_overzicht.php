@@ -50,7 +50,7 @@
                         <a href="#" class="list-group-item">Basestation onderhoud</a>
                         <a href="account_overzicht.php" class="list-group-item active">Account beheer</a>
                         <a href="basestation_overzicht.php" class="list-group-item">Basestation Overzicht</a>
-                        <a href="#" class="list-group-item">Wachtwoord wijzigen</a>
+                        <a href="wijzigen_wachtwoord.php" class="list-group-item">Wachtwoord wijzigen</a>
                         <a href="Logout.php" class="list-group-item">Uitloggen</a>
                         <div class="list-group-item empty"></div>
                     </div>
